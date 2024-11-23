@@ -38,3 +38,14 @@ function bypat_enqueue_scripts() {
     );
 }
 add_action('wp_enqueue_scripts', 'bypat_enqueue_scripts');
+
+wp_enqueue_script('jquery');
+
+    // Scripts
+    wp_enqueue_script(
+        'custom-script',
+        get_template_directory_uri() . '/assets/js/custom.js',
+        array('jquery'),
+        filemtime(get_template_directory() . '/assets/js/custom.js'),
+        true
+    );

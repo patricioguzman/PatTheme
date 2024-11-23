@@ -1,16 +1,3 @@
-/*
-Theme Name: ByPat Theme
-Theme URI: https://example.com
-Author: Patricio Guzmán
-Author URI: https://example.com
-Description: A custom WordPress theme for ByPat.
-Version: 1.0
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: custom-theme
-Text Domain: bypat
-*/
-
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
