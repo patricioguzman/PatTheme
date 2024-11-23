@@ -14,14 +14,15 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
         </button>
-        <nav id="menu" class="hidden lg:flex space-x-4">
-            <?php
-            wp_nav_menu(array(
-                'theme_location' => 'primary',
-                'menu_class' => 'flex space-x-4',
-                'container' => false,
-            ));
-            ?>
-        </nav>
+        <nav id="menu" class="hidden lg:flex flex-col space-y-4 bg-gray-800 text-white p-4 rounded-md absolute top-16 right-4">
+    <?php
+    wp_nav_menu(array(
+        'theme_location' => 'primary',
+        'menu_class' => 'flex flex-col space-y-4',
+        'container' => false,
+    ));
+    ?>
+</nav>
+
     </div>
 </header>

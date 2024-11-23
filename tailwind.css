@@ -106,3 +106,26 @@ footer p {
   font-size: 0.875rem;
 }
 
+#menu {
+  display: none; /* Ocultar el menú inicialmente */
+  flex-direction: column; /* Asegurar que los elementos sean verticales */
+  gap: 1rem; /* Espaciado entre los elementos */
+  position: absolute; /* Hacer que el menú sea absoluto */
+  top: 4rem; /* Ajustar el espacio superior */
+  right: 1rem; /* Alinearlo al lado derecho */
+  background-color: #1f2937; /* Fondo oscuro */
+  padding: 1rem; /* Espaciado interno */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  z-index: 50; /* Asegurar que quede sobre otros elementos */
+}
+#menu a {
+  color: #fff; /* Texto blanco */
+  text-decoration: none; /* Sin subrayado */
+}
+
+}
+#menu a {
+  color: #fff; /* Texto blanco */
+  text-decoration: none; /* Sin subrayado */
+}
+
