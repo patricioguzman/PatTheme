@@ -123,9 +123,14 @@ footer p {
   text-decoration: none; /* Sin subrayado */
 }
 
+#matrixCanvas {
+  position: fixed; /* Permite que el canvas esté siempre visible */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ocupa todo el ancho */
+  height: 100%; /* Ocupa todo el alto */
+  z-index: -1; /* Asegura que el canvas esté detrás de todo el contenido */
+  pointer-events: none; /* Evita que interfiera con clics u otros eventos */
 }
-#menu a {
-  color: #fff; /* Texto blanco */
-  text-decoration: none; /* Sin subrayado */
-}
+
 

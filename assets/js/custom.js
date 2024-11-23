@@ -1,21 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {  
-    // Efecto Matrix en el canvas
+    const loading = document.getElementById("loading");
+    if (loading) {
+        loading.style.display = "none"; // Oculta el contenedor de "loading"
+    }
+
     const canvas = document.getElementById("matrixCanvas");
     if (canvas) {
         const ctx = canvas.getContext("2d");
+
+        // Ajustar tamaño del canvas al viewport
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         const characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVXYZ@#$%^&*()";
         const fontSize = 16;
-        const columns = Math.floor(canvas.width / fontSize);
-        const drops = Array(columns).fill(0);
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(0);
 
         function draw() {
             ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = "#0F0"; // Color verde
+            ctx.fillStyle = "#0F0";
             ctx.font = `${fontSize}px monospace`;
 
             drops.forEach((y, i) => {
@@ -23,18 +28,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 const x = i * fontSize;
                 ctx.fillText(text, x, y * fontSize);
 
-                // Reiniciar columna si se sale de la pantalla o al azar
                 if (y * fontSize > canvas.height || Math.random() > 0.975) {
                     drops[i] = 0;
                 }
-
                 drops[i]++;
             });
         }
 
         setInterval(draw, 50);
-    }
-});
+
+        // Redimensionar el canvas si el tamaño de la ventana cambia
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    }  
 
 const menuToggle = document.getElementById("menu-toggle");
 const menu = document.getElementById("menu");
@@ -94,8 +102,3 @@ if (menuToggle && menu) {
     }
 
     typeRole();
-
-       
-    
-
-    

@@ -20,6 +20,7 @@ add_action('after_setup_theme', 'bypat_theme_setup');
 
 // === CARGAR ESTILOS Y SCRIPTS === //
 function bypat_enqueue_scripts() {
+    // Estilos
     wp_enqueue_style(
         'tailwind-style',
         get_template_directory_uri() . '/dist/style.css',
@@ -27,8 +28,9 @@ function bypat_enqueue_scripts() {
         filemtime(get_template_directory() . '/dist/style.css')
     );
 
+    // Scripts
     wp_enqueue_script(
-        'custom-js',
+        'custom-script',
         get_template_directory_uri() . '/assets/js/custom.js',
         array(),
         filemtime(get_template_directory() . '/assets/js/custom.js'),
