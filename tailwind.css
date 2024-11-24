@@ -159,6 +159,7 @@ footer img {
 #loading.hidden {
   opacity: 0;
   pointer-events: none;
+  transition: opacity 1.5s ease-in-out;
 }
 
 canvas {
