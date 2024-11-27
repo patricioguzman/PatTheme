@@ -1,5 +1,5 @@
 <?php
-require_once get_template_directory() . '/inc/tgm-plugin-activation/class-tgm-plugin-activation.php';
+    require_once get_template_directory() . '/inc/tgm-plugin-activation.php';
 
 add_action('tgmpa_register', 'pattheme_register_required_plugins');
 
@@ -33,7 +33,7 @@ function pattheme_register_required_plugins() {
         'menu'         => 'tgmpa-install-plugins',
         'has_notices'  => true,
         'dismissable'  => true,
-        'is_automatic' => false,
+        'is_automatic' => true,
     ];
 
     tgmpa($plugins, $config);

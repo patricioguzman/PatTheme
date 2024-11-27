@@ -1,4 +1,6 @@
 <?php
+require_once get_template_directory() . '/inc/register-plugins.php';
+
 // === CONFIGURACIÓN DEL TEMA === //
 function bypat_theme_setup() {
     add_theme_support('menus');
