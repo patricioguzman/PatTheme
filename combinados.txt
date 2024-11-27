@@ -1,3 +1,45 @@
+<?php get_header(); ?>
+<div id="loading" class="fixed top-0 left-0 w-full h-full bg-black flex items-center justify-center z-50">
+    <canvas id="matrixCanvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+</div>
+
+<section class="relative h-screen flex items-center justify-center text-center text-white">
+    <!-- Video de fondo -->
+    <video
+        class="absolute top-0 left-0 w-full h-full object-cover"
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="<?php echo get_template_directory_uri(); ?>/assets/images/screenshot.png"
+    >
+        <source src="<?php echo get_template_directory_uri(); ?>/assets/video/matrixpat.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <!-- Contenido del Hero -->
+    <div class="relative z-10">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I’m Pat</h1>
+        <p id="dynamic-role" class="text-xl md:text-2xl font-light">Loading...</p>
+        <button class="mt-4 px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+             CV
+        </button>
+    </div>
+</section>
+
+<?php get_footer(); ?>
+
+/*
+Theme Name: PatTheme
+Theme URI: https://bypat.com.au
+Author: Patricio Guzmán
+Author URI: https://bypat.com.au/
+Description: A custom WordPress theme.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: pattheme
+*/
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -106,8 +148,7 @@
   --tw-contain-style:  ;
 }
 
-/*
-! tailwindcss v3.4.15 | MIT License | https://tailwindcss.com
+/*! tailwindcss v3.4.15 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -152,7 +193,7 @@ html,
   -moz-tab-size: 4;
   /* 3 */
   -o-tab-size: 4;
-     tab-size: 4;
+  tab-size: 4;
   /* 3 */
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   /* 4 */
@@ -197,7 +238,7 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 
 abbr:where([title]) {
   -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
+  text-decoration: underline dotted;
 }
 
 /*
@@ -554,8 +595,54 @@ video {
   display: none;
 }
 
-.fixed {
-  position: fixed;
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.static {
+  position: static;
 }
 
 .absolute {
@@ -578,8 +665,9 @@ video {
   z-index: 10;
 }
 
-.z-50 {
-  z-index: 50;
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mb-4 {
@@ -590,12 +678,24 @@ video {
   margin-top: 1rem;
 }
 
+.block {
+  display: block;
+}
+
 .flex {
   display: flex;
 }
 
+.contents {
+  display: contents;
+}
+
 .hidden {
   display: none;
+}
+
+.h-6 {
+  height: 1.5rem;
 }
 
 .h-full {
@@ -606,8 +706,16 @@ video {
   height: 100vh;
 }
 
+.w-6 {
+  width: 1.5rem;
+}
+
 .w-full {
   width: 100%;
+}
+
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .resize {
@@ -622,17 +730,18 @@ video {
   justify-content: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .rounded {
   border-radius: 0.25rem;
-}
-
-.border {
-  border-width: 1px;
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
 }
 
 .bg-blue-500 {
@@ -640,9 +749,24 @@ video {
   background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
 }
 
+.bg-gray-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+}
+
+.bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
+}
+
 .object-cover {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .px-6 {
@@ -655,6 +779,16 @@ video {
   padding-bottom: 0.5rem;
 }
 
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -662,6 +796,11 @@ video {
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .text-xl {
@@ -677,31 +816,59 @@ video {
   font-weight: 300;
 }
 
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity, 1));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.underline {
-  text-decoration-line: underline;
 }
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-.transition {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
 }
 
-/* ===== Encabezado ===== */
+.hover\:bg-blue-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity, 1));
+}
 
+@media (min-width: 768px) {
+  .md\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .md\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:flex {
+    display: flex;
+  }
+
+  .lg\:hidden {
+    display: none;
+  }
+}@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Encabezado */
 header {
-  background-color: #1a202c;
+  background-color: #1a202c; /* Un gris oscuro elegante */
   color: #ffffff;
   padding: 1rem 2rem;
 }
@@ -713,7 +880,7 @@ header a {
 }
 
 header a:hover {
-  color: #63b3ed;
+  color: #63b3ed; /* Azul claro para hover */
 }
 
 header nav ul {
@@ -727,11 +894,10 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
-  background-color: #2d3748;
+  background-color: #2d3748; /* Gris más oscuro */
 }
 
-/* ===== Sección Hero ===== */
-
+/* Hero Section */
 section {
   position: relative;
   height: 100vh;
@@ -748,10 +914,9 @@ section video {
   left: 0;
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   z-index: -1;
-  filter: brightness(0.6);
+  filter: brightness(0.6); /* Oscurece el fondo */
 }
 
 section h1 {
@@ -769,7 +934,7 @@ section p {
 section button {
   margin-top: 2rem;
   padding: 0.75rem 1.5rem;
-  background-color: #3182ce;
+  background-color: #3182ce; /* Azul profesional */
   color: white;
   font-size: 1rem;
   border: none;
@@ -779,26 +944,23 @@ section button {
 }
 
 section button:hover {
-  background-color: #2b6cb0;
+  background-color: #2b6cb0; /* Azul más oscuro para hover */
 }
 
-/* ===== Efecto Matrix ===== */
-
+/* Matrix Effect */
 canvas {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -2;
-  pointer-events: none;
 }
 
-/* ===== Footer ===== */
-
+/* Footer */
 footer {
-  background-color: #2d3748;
-  color: #a0aec0;
+  background-color: #2d3748; /* Gris oscuro */
+  color: #a0aec0; /* Gris claro */
   text-align: center;
   padding: 1rem 0;
 }
@@ -808,7 +970,40 @@ footer p {
   font-size: 0.875rem;
 }
 
-/* ===== Pantalla de Carga ===== */
+footer img {
+  margin: 0 auto;
+  border: 2px solid white;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+
+#menu {
+  display: none; /* Ocultar el menú inicialmente */
+  flex-direction: column; /* Asegurar que los elementos sean verticales */
+  gap: 1rem; /* Espaciado entre los elementos */
+  position: absolute; /* Hacer que el menú sea absoluto */
+  top: 4rem; /* Ajustar el espacio superior */
+  right: 1rem; /* Alinearlo al lado derecho */
+  background-color: #1f2937; /* Fondo oscuro */
+  padding: 1rem; /* Espaciado interno */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  z-index: 50; /* Asegurar que quede sobre otros elementos */
+}
+#menu a {
+  color: #fff; /* Texto blanco */
+  text-decoration: none; /* Sin subrayado */
+}
+
+#matrixCanvas {
+  position: fixed; /* Permite que el canvas esté siempre visible */
+  top: 0;
+  left: 0;
+  width: 100%; /* Ocupa todo el ancho */
+  height: 100%; /* Ocupa todo el alto */
+  z-index: -1; /* Asegura que el canvas esté detrás de todo el contenido */
+  pointer-events: none; /* Evita que interfiera con clics u otros eventos */
+}
 
 #loading {
   position: fixed;
@@ -828,32 +1023,127 @@ footer p {
 #loading.hidden {
   opacity: 0;
   pointer-events: none;
+  transition: opacity 1.5s ease-in-out;
 }
 
-#main-content {
-  display: none;
+canvas {
+  display: block;
+  z-index: 10000;
+}
+
+section,
+video {
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
 }
 
-body.loaded #main-content {
-  display: block;
+body.loaded section,
+body.loaded video {
   opacity: 1;
 }
 
-.hover\:bg-blue-700:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(29 78 216 / var(--tw-bg-opacity, 1));
-}
 
-@media (min-width: 768px) {
-  .md\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
 
-  .md\:text-6xl {
-    font-size: 3.75rem;
-    line-height: 1;
-  }
-}
+document.addEventListener("DOMContentLoaded", function () {  
+    const loading = document.getElementById("loading");
+    const canvas = document.getElementById("matrixCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Ajustar tamaño del canvas
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVXYZ@#$%^&*()";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(0);
+
+    // Función de animación Matrix
+    function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0F0";
+        ctx.font = `${fontSize}px monospace`;
+
+        drops.forEach((y, i) => {
+            const text = characters[Math.floor(Math.random() * characters.length)];
+            const x = i * fontSize;
+            ctx.fillText(text, x, y * fontSize);
+
+            if (y * fontSize > canvas.height || Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
+        });
+    }
+
+    const matrixInterval = setInterval(draw, 50);
+
+    // Ocultar Matrix y mostrar contenido después de 3 segundos
+    setTimeout(() => {
+        clearInterval(matrixInterval); // Detener la animación Matrix
+        if (loading) {
+            loading.classList.add("hidden"); // Desvanecer pantalla de carga
+        }
+        document.body.classList.add("loaded"); // Mostrar contenido principal
+    }, 3000);
+
+    // Manejo del menú hamburguesa
+    const menuToggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("menu");
+
+    if (menuToggle && menu) {
+        menuToggle.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+        });
+    }
+
+    // Roles dinámicos
+    const roles = [
+        "💻 Full Stack Web Developer",
+        "🖥️ System and Server Administrator",
+        "🌐 Network and Telecommunications Specialist",
+        "📱 Community Manager",
+        "📂 IT Project Manager",
+        "🎨 UX/UI Designer",
+        "📐 3D Modeler",
+        "🚁 Drone Operator and Aerial Data Analyst",
+        "🔒 Cybersecurity Consultant",
+        "👨‍💻 Software Engineer"
+    ];
+    let roleIndex = 0;
+
+    function typeRole() {
+        const roleElement = document.getElementById("dynamic-role");
+        if (!roleElement) return;
+
+        const currentRole = roles[roleIndex];
+        roleElement.textContent = "";
+        let charIndex = 0;
+
+        function typeChar() {
+            if (charIndex < currentRole.length) {
+                roleElement.textContent += currentRole[charIndex];
+                charIndex++;
+                setTimeout(typeChar, 100);
+            } else {
+                roleIndex = (roleIndex + 1) % roles.length;
+                setTimeout(() => eraseRole(roleElement), 2000);
+            }
+        }
+
+        function eraseRole(element) {
+            const currentText = element.textContent;
+            if (currentText.length > 0) {
+                element.textContent = currentText.slice(0, -1);
+                setTimeout(() => eraseRole(element), 100);
+            } else {
+                typeRole();
+            }
+        }
+
+        typeChar();
+    }
+
+    typeRole();
+});

@@ -1,48 +1,54 @@
-document.addEventListener("DOMContentLoaded", function () {  
+
+document.addEventListener("DOMContentLoaded", function () {
     const loading = document.getElementById("loading");
+    const mainContent = document.getElementById("main-content");
     const canvas = document.getElementById("matrixCanvas");
-    const ctx = canvas.getContext("2d");
 
-    // Ajustar tamaño del canvas
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    if (canvas) {
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-    const characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVXYZ@#$%^&*()";
-    const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(0);
+        const characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVXYZ@#$%^&*()";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(0);
 
-    // Función de animación Matrix
-    function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#0F0";
-        ctx.font = `${fontSize}px monospace`;
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0F0";
+            ctx.font = `${fontSize}px monospace`;
 
-        drops.forEach((y, i) => {
-            const text = characters[Math.floor(Math.random() * characters.length)];
-            const x = i * fontSize;
-            ctx.fillText(text, x, y * fontSize);
+            drops.forEach((y, i) => {
+                const text = characters[Math.floor(Math.random() * characters.length)];
+                const x = i * fontSize;
+                ctx.fillText(text, x, y * fontSize);
 
-            if (y * fontSize > canvas.height || Math.random() > 0.975) {
-                drops[i] = 0;
+                if (y * fontSize > canvas.height || Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            });
+        }
+
+        const matrixInterval = setInterval(draw, 50);
+
+        setTimeout(() => {
+            clearInterval(matrixInterval);
+            if (loading) {
+                loading.classList.add("hidden");
             }
-            drops[i]++;
+            document.body.classList.add("loaded");
+            mainContent.classList.remove("hidden");
+        }, 3000);
+
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         });
     }
 
-    const matrixInterval = setInterval(draw, 50);
-
-    // Ocultar Matrix y mostrar contenido después de 3 segundos
-    setTimeout(() => {
-        clearInterval(matrixInterval); // Detener la animación Matrix
-        if (loading) {
-            loading.classList.add("hidden"); // Desvanecer pantalla de carga
-        }
-        document.body.classList.add("loaded"); // Mostrar contenido principal
-    }, 3000);
-
-    // Manejo del menú hamburguesa
     const menuToggle = document.getElementById("menu-toggle");
     const menu = document.getElementById("menu");
 
@@ -52,7 +58,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Roles dinámicos
     const roles = [
         "💻 Full Stack Web Developer",
         "🖥️ System and Server Administrator",
