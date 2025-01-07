@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     const loading = document.getElementById("loading");
     const mainContent = document.getElementById("main-content");
@@ -105,4 +104,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     typeRole();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.querySelector('a .mt-4');
+    button.classList.add('vibrate');
+
+    const pointer = document.createElement('div');
+    pointer.classList.add('pointer', 'pulse');
+    button.appendChild(pointer);
 });

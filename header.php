@@ -5,24 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php bloginfo('name'); ?> - <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
     <?php wp_head(); ?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 75%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+            transform: translateX(100%);
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+            transform: translateX(0);
+        }
+        .menu-button {
+            margin-right: 20px;
+        }
+    </style>
 </head>
 <body <?php body_class(); ?>>
 <header class="bg-gray-900 text-white py-4">
     <div class="container mx-auto flex justify-between items-center">
-        <a href="<?php echo home_url(); ?>" class="text-2xl font-bold">ByPat</a>
-        <button id="menu-toggle" class="block lg:hidden">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-        </button>
-        <nav id="menu" class="hidden lg:flex space-x-4">
-            <?php
-            wp_nav_menu(array(
-                'theme_location' => 'primary',
-                'menu_class' => 'flex space-x-4',
-                'container' => false,
-            ));
-            ?>
-        </nav>
+        <a href="<?php echo home_url(); ?>" class="text-2xl font-bold">ByPat.com.au</a>
+        <div class="flex-grow"></div>
+        <div class="dropdown" style="margin-left: auto;">
+            <button class="text-white menu-button">☰</button>
+            <div class="dropdown-content">
+                <?php
+                wp_nav_menu(array(
+                    'theme_location' => 'primary',
+                    'menu_class' => 'flex flex-col space-y-4',
+                    'container' => false,
+                ));
+                ?>
+            </div>
+        </div>
     </div>
 </header>

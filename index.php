@@ -1,4 +1,3 @@
-
 <?php get_header(); ?>
 
 <!-- Contenedor de carga con efecto Matrix -->
