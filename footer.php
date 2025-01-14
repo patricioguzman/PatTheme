@@ -1,71 +1,46 @@
-<style>
-    .footer-icons a {
-        transition: transform 0.3s ease, color 0.3s ease;
-        margin: 0 10px;
-    }
-    .footer-icons a:hover {
-        transform: scale(1.2);
-        color: #ffffff;
-    }
-    @media (min-width: 768px) {
-        .footer-icons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .footer-icons .category {
-            margin-right: 30px;
-        }
-    }
-</style>
-
-<footer class="bg-gray-800 text-gray-400 py-6">
-    <div class="container mx-auto text-center">
-        <div class="footer-icons mb-4">
-            <!-- Contact Links -->
-            <div class="category">
-                <a href="path/to/yourvcard.vcf" class="text-gray-400 hover:text-white mx-2">
-                    <i class="fas fa-id-card"></i>
-                </a>
-            </div>
-            <!-- Social Media Links -->
-            <div class="category">
-                <a href="https://www.instagram.com/patricioguzman" class="text-gray-400 hover:text-white mx-2">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.youtube.com/yourchannelr" class="text-gray-400 hover:text-white mx-2">
-                    <i class="fab fa-youtube"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/yourprofile" class="text-gray-400 hover:text-white mx-2">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://soundcloud.com/yourprofile" class="text-gray-400 hover:text-white mx-2">
-                    <i class="fab fa-soundcloud"></i>
-                </a>
-                <a href="https://www.twitch.tv/yourchannel" class="text-gray-400 hover:text-white mx-2">
-                    <i class="fab fa-twitch"></i>
-                </a>
-                <a href="https://open.spotify.com/user/yourprofile" class="text-gray-400 hover:text-white mx-2">
-                    <i class="fab fa-spotify"></i>
-                </a>
-            </div>
-            
-            <!-- Other Links -->
-            <div class="category">
-             
-                <a href="https://www.paypal.com/paypalme/yourprofile" class="text-gray-400 hover:text-white mx-2">
-                    <i class="fab fa-paypal"></i>
-                </a>
-                <a href="https://www.yourwebsite1.com" class="text-gray-400 hover:text-white mx-2">
-                    <i class="fas fa-globe"></i>
-                </a>
-                <a href="https://www.yourwebsite2.com" class="text-gray-400 hover:text-white mx-2">
-                    <i class="fas fa-globe"></i>
-                </a>
-            </div>
+<footer class="bg-black text-white text-center py-4">
+    <div class="container mx-auto">
+        <div class="flex justify-center mb-4 space-x-6">
+            <a href="https://www.youtube.com/channel/UCtD_B2ZV7RuS7ZO6dDRCumw" class="text-gray-400 hover:text-white px-6 py-2 md:px-4">
+                <i class="fab fa-youtube fa-lg"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/patricioguzman/" class="text-gray-400 hover:text-white px-6 py-2 md:px-4">
+                <i class="fab fa-linkedin fa-lg"></i>
+            </a>
+            <a href="https://soundcloud.com/patricio-guzman12/tracks" class="text-gray-400 hover:text-white px-6 py-2 md:px-4">
+                <i class="fab fa-soundcloud fa-lg"></i>
+            </a>
+            <a href="https://open.spotify.com/user/12128324603?si=07ef59e5d04b4e0e" class="text-gray-400 hover:text-white px-6 py-2 md:px-4">
+                <i class="fab fa-spotify fa-lg"></i>
+            </a>
+            <a href="https://www.threads.net/@patricioguzman" class="text-gray-400 hover:text-white px-6 py-2 md:px-4">
+                <i class="fab fa-threads fa-lg"></i>
+            </a>
+            <a href="https://www.facebook.com/patricio.guzman.sanchez/" class="text-gray-400 hover:text-white px-6 py-2 md:px-4">
+                <i class="fab fa-facebook fa-lg"></i>
+            </a>
+            <a href="https://www.instagram.com/patricioguzman/" class="text-gray-400 hover:text-white px-6 py-2 md:px-4">
+                <i class="fab fa-instagram fa-lg"></i>
+            </a>
+            <a href="https://twitch.tv/patricknite24" class="text-gray-400 hover:text-white px-6 py-2 md:px-4">
+                <i class="fab fa-twitch fa-lg"></i>
+            </a>
+        </div>
+        
+        <!-- Other Links -->
+        <div class="flex justify-center mb-4 space-x-6">
+            <a href="https://paypal.me/PatricioGuzmanS?country.x=CL&locale.x=es_XC" class="text-gray-400 hover:text-white px-6 py-2 md:px-4">
+                <i class="fab fa-paypal fa-lg"></i>
+            </a>
+            <a href="https://astromedia.cl" class="text-gray-400 hover:text-white px-6 py-2 md:px-4">
+                <i class="fas fa-globe fa-lg"></i>
+            </a>
+            <a href="https://hackeate.org" class="text-gray-400 hover:text-white px-6 py-2 md:px-4">
+                <i class="fas fa-globe fa-lg"></i>
+            </a>
         </div>
         <p class="text-sm">
-            Copyright © 1989 – <?php echo date("Y"); ?> ByPat.com.au All Rights Reserved.
+            © <?php echo date("Y"); ?> bypat.com.au All Rights Reserved.
         </p>
     </div>
 </footer>

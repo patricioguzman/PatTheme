@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (canvas) {
         const ctx = canvas.getContext("2d");
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.height = document.documentElement.clientHeight; // Use clientHeight
 
         const characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVXYZ@#$%^&*()";
         const fontSize = 16;
@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
             clearInterval(matrixInterval);
             if (loading) {
-                loading.classList.add("hidden");
+                loading.style.display = "none"; // Hide loading container
+                loading.remove(); // Remove loading container
             }
             document.body.classList.add("loaded");
             mainContent.classList.remove("hidden");
@@ -44,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         window.addEventListener("resize", () => {
             canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.height = document.documentElement.clientHeight; // Use clientHeight
         });
     }
 
@@ -75,6 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const roleElement = document.getElementById("dynamic-role");
         if (!roleElement) return;
 
+        roleElement.style.height = "2em"; // Fix height
+        roleElement.style.overflow = "hidden"; // Prevent reflow
+
         const currentRole = roles[roleIndex];
         roleElement.textContent = "";
         let charIndex = 0;
@@ -104,13 +108,94 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     typeRole();
+
+    // Add hover effect for "Schedule Appointment" button
+    const scheduleButton = document.querySelector('a[href*="calendar.google.com"]');
+    if (scheduleButton) {
+        let hoverTimeout;
+        scheduleButton.addEventListener('mouseenter', () => {
+            const loadingSymbol = document.createElement('div');
+            loadingSymbol.classList.add('loading-symbol');
+            loadingSymbol.style.display = 'inline-block';
+            loadingSymbol.style.marginLeft = '10px';
+            loadingSymbol.style.border = '4px solid #00ff00';
+            loadingSymbol.style.borderTop = '4px solid transparent';
+            loadingSymbol.style.borderRadius = '50%';
+            loadingSymbol.style.width = '24px';
+            loadingSymbol.style.height = '24px';
+            loadingSymbol.style.verticalAlign = 'middle'; // Center vertically
+            loadingSymbol.style.animation = 'spin 1s linear infinite';
+            scheduleButton.appendChild(loadingSymbol);
+
+            hoverTimeout = setTimeout(() => {
+                scheduleButton.click();
+            }, 3000);
+
+            // Apply transition effect
+            scheduleButton.style.transition = 'background-color 0.3s, color 0.3s';
+            scheduleButton.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            scheduleButton.style.color = '#00ff00';
+        });
+
+        scheduleButton.addEventListener('mouseleave', () => {
+            clearTimeout(hoverTimeout);
+            const loadingSymbol = scheduleButton.querySelector('.loading-symbol');
+            if (loadingSymbol) {
+                scheduleButton.removeChild(loadingSymbol);
+            }
+
+            // Revert transition effect
+            scheduleButton.style.backgroundColor = '';
+            scheduleButton.style.color = '';
+        });
+
+        // Ensure loading symbol remains until the next page is fully loaded
+        scheduleButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.classList.add('loading-overlay');
+            loadingOverlay.style.position = 'fixed';
+            loadingOverlay.style.top = '0';
+            loadingOverlay.style.left = '0';
+            loadingOverlay.style.width = '100%';
+            loadingOverlay.style.height = '100%';
+            loadingOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            loadingOverlay.style.display = 'flex';
+            loadingOverlay.style.alignItems = 'center';
+            loadingOverlay.style.justifyContent = 'center';
+            loadingOverlay.style.zIndex = '9999';
+            document.body.appendChild(loadingOverlay);
+
+            const loadingSymbol = document.createElement('div');
+            loadingSymbol.classList.add('loading-symbol');
+            loadingSymbol.style.border = '4px solid #00ff00';
+            loadingSymbol.style.borderTop = '4px solid transparent';
+            loadingSymbol.style.borderRadius = '50%';
+            loadingSymbol.style.width = '48px';
+            loadingSymbol.style.height = '48px';
+            loadingSymbol.style.animation = 'spin 1s linear infinite';
+            loadingOverlay.appendChild(loadingSymbol);
+
+            window.location.href = scheduleButton.href;
+        });
+    }
 });
+
+// Add CSS for loading symbol animation
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+`;
+document.head.appendChild(style);
 
 document.addEventListener('DOMContentLoaded', function() {
     const button = document.querySelector('a .mt-4');
-    button.classList.add('vibrate');
-
-    const pointer = document.createElement('div');
-    pointer.classList.add('pointer', 'pulse');
-    button.appendChild(pointer);
+    if (button) {
+        button.style.width = "200px"; // Fix button width
+        button.style.height = "50px"; // Fix button height
+        button.style.position = "relative";
+    }
 });

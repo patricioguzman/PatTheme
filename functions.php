@@ -6,7 +6,6 @@ if (defined('WP_ENVIRONMENT_TYPE') && WP_ENVIRONMENT_TYPE === 'local') {
 
 // === CONFIGURACIÓN DEL TEMA === //
 function bypat_theme_setup() {
-    add_theme_support('menus');
     register_nav_menus(array(
         'primary' => __('Primary Menu', 'bypat'),
         'footer' => __('Footer Menu', 'bypat'),
@@ -25,27 +24,67 @@ function bypat_theme_setup() {
     add_theme_support('wp-block-styles');
     add_theme_support('custom-line-height');
     add_theme_support('custom-spacing');
+    add_theme_support('automatic-feed-links'); // Add support for automatic feed links
+    add_theme_support('responsive-embeds'); // Add support for responsive embeds
+    add_theme_support('custom-header'); // Add support for custom header
+    add_theme_support('custom-background'); // Add support for custom background
 }
 add_action('after_setup_theme', 'bypat_theme_setup');
 
-// === CARGAR ESTILOS Y SCRIPTS === //
+// === Cargar Estilos y Scripts === //
 function bypat_enqueue_assets() {
-    // Estilos
+    // 1. Estilos
+    // Estilos de Tailwind (local)
     wp_enqueue_style(
         'tailwind-style',
         get_template_directory_uri() . '/dist/style.css',
-        array(),
-        filemtime(get_template_directory() . '/dist/style.css')
+        array(), // Sin dependencias
+        filemtime(get_template_directory() . '/dist/style.css') // Forzar recarga con la versión del archivo
     );
 
-    wp_enqueue_style('bypat-style', get_stylesheet_uri(), array(), wp_get_theme()->get('Version'));
+    // Estilos del tema principal
+    wp_enqueue_style(
+        'bypat-style',
+        get_stylesheet_uri(),
+        array('tailwind-style'), // Dependencia: Tailwind debe cargarse primero
+        wp_get_theme()->get('Version') // Usa la versión del tema
+    );
 
-    // Scripts
+    // Font Awesome (local)
+    wp_enqueue_style(
+        'font-awesome',
+        get_template_directory_uri() . '/assets/css/fontawesome.min.css',
+        array(), // Sin dependencias
+        '6.0.0-beta3' // Versión de la librería
+    );
+
+    // Font Awesome All (local)
+    wp_enqueue_style(
+        'font-awesome-all',
+        get_template_directory_uri() . '/assets/css/all.min.css',
+        array('font-awesome'), // Dependencia: Font Awesome debe cargarse primero
+        '6.0.0-beta3' // Versión de la librería
+    );
+
+    // 2. Scripts
+    // Asegurar que jQuery esté disponible
+    wp_enqueue_script('jquery'); 
+
+    // Script personalizado del tema (local)
     wp_enqueue_script(
         'custom-script',
         get_template_directory_uri() . '/assets/js/custom.js',
         array('jquery'), // Dependencia de jQuery
-        filemtime(get_template_directory() . '/assets/js/custom.js'),
+        filemtime(get_template_directory() . '/assets/js/custom.js'), // Forzar recarga
+        true // Cargar en el footer
+    );
+
+    // GSAP (local)
+    wp_enqueue_script(
+        'gsap',
+        get_template_directory_uri() . '/assets/js/gsap.min.js',
+        array(), // Sin dependencias
+        '3.12.2', // Versión de la librería
         true // Cargar en el footer
     );
 }
@@ -128,21 +167,6 @@ if (function_exists('acf_add_local_field_group')) {
     ));
 }
 
-// === REGISTRAR BLOQUES PERSONALIZADOS === //
-function bypat_register_blocks() {
-    wp_register_script(
-        'bypat-block',
-        get_template_directory_uri() . '/blocks/custom-block.js',
-        array('wp-blocks', 'wp-element', 'wp-editor'),
-        true
-    );
-
-    register_block_type('bypat/custom-block', array(
-        'editor_script' => 'bypat-block',
-    ));
-}
-add_action('init', 'bypat_register_blocks');
-
 // === RECOMENDACIÓN DE PLUGINS === //
 function bypat_register_recommended_plugins() {
     $plugins = array(
@@ -171,3 +195,6 @@ function bypat_register_recommended_plugins() {
     tgmpa( $plugins, $config );
 }
 add_action( 'tgmpa_register', 'bypat_register_recommended_plugins' );
+
+// Remove WordPress Admin Bar
+add_filter('show_admin_bar', '__return_false');
