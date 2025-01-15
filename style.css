@@ -15,15 +15,18 @@ Requires PHP: 7.2
 Copyright: © 2023 Patricio Guzmán. All rights reserved.
 */
 /* Import Tailwind CSS */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 /* ===== Encabezado ===== */
 header {
   background-color: #000000;
   color: #ffffff;
   padding: 1rem 2rem;
+  width: 100%; /* Ensure header occupies full width */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 header a {
@@ -61,6 +64,8 @@ section {
   color: white;
   background: none; /* Remove black background */
   position: relative;
+  width: 100%; /* Ensure section occupies full width */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 section video {
@@ -133,7 +138,8 @@ footer {
   margin-top: auto;
   position: relative;
   bottom: 0;
-  width: 100%;
+  width: 100%; /* Ensure footer occupies full width */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 /* ===== Pantalla de Carga ===== */
@@ -165,6 +171,8 @@ footer {
   background: none; /* Remove black background */
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
+  width: 100%; /* Ensure main content occupies full width */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 body.loaded #main-content {

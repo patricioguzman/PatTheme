@@ -8,7 +8,7 @@
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<header class="bg-black text-white py-4">
+<header class="bg-black text-white py-4 w-full box-border">
     <div class="container mx-auto flex justify-between items-center">
         <a href="<?php echo esc_url(home_url()); ?>">ByPat.com.au</a>
         <div class="flex-grow"></div>
